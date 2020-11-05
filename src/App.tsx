@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './components/atomos/Cell'
+import Cell from './components/atomos/Cell';
 
 function App() {
   return (
@@ -19,6 +21,11 @@ function App() {
           Learn React
         </a>
       </header>
+      <body>
+        <Cell val={5} />
+        <Cell val={6} />
+        <Cell val={30} />
+      </body>
     </div>
   );
 }
