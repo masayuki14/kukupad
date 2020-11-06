@@ -17,10 +17,9 @@ function Cell({ val, hidden = false, locked = false }: { val: number, hidden?: b
 
   const [isHidden, switchHidden] = useState(hidden)
   const handleTap = () => locked ? null : switchHidden(!isHidden)
-
-
+  const bgcolor = () => isHidden ? 'gray' : 'white'
   const divStyle = Object.assign(
-    { backgroundColor: !locked && isHidden ? 'gray' : 'white' },
+    { backgroundColor: !locked ? bgcolor() : bgcolor() },
     style.cell
   )
 

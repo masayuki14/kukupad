@@ -25,7 +25,7 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Cell val={5} locked={true} />
           <Cell val={6} hidden={true} />
-          <Cell val={30} />
+          <Cell val={30} hidden={true} locked={true} />
         </div>
       </body>
     </div>
