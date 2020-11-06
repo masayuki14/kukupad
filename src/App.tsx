@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './components/Cell'
+import Cell from './components/Cell';
 
 function App() {
   return (
@@ -19,6 +21,13 @@ function App() {
           Learn React
         </a>
       </header>
+      <body>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Cell val={5} locked={true} />
+          <Cell val={6} hidden={true} />
+          <Cell val={30} hidden={true} locked={true} />
+        </div>
+      </body>
     </div>
   );
 }
