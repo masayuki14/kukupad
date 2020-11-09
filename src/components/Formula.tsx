@@ -25,7 +25,7 @@ function Formula(props: PropTypes) {
       <Cell val="×" noBorder={true} slim={true} />
       <Cell val={props.right} hidden={props.mask === MaskPosition.Right} locked={props.mask !== MaskPosition.Right} />
       <Cell val="＝" noBorder={true} slim={true} />
-      <Cell val={props.outcome} hidden={props.mask === MaskPosition.Outcom} locked={props.mask !== MaskPosition.Outcom} />
+      <Cell val={props.outcome} hidden={props.mask === MaskPosition.Outcome} locked={props.mask !== MaskPosition.Outcome} />
     </ div>
   )
 }
