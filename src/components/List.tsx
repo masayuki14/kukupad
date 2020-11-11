@@ -1,32 +1,25 @@
 import React from 'react';
 import Formula from './Formula'
 import {
-  MaskPosition,
   MaskType,
   convertType
 } from './../enum'
 
-const list = (axis: number, step: number, mask?: MaskType | undefined) => {
-  const steps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-  const list = []
-  for (let i = 0; i < step; i++) {
-    let position = convertType(mask)
-    list.push((<Formula left={axis} right={steps[i]} outcome={axis * steps[i]} mask={position} />))
-  }
-  return list
-}
-
 type PropTypes = {
+  steps: number[],
   axis: number,
-  step: number,
-  maskType?: MaskType
+  mask?: MaskType
 }
 
 function List(props: PropTypes) {
+  const formulas = props.steps.map(
+    (v, i) => (<Formula key={i} left={props.axis} right={v} outcome={props.axis * v} mask={convertType(props.mask)} />)
+  )
+
   return (
-    <div>
-      { list(props.axis, props.step, props.maskType)}
-    </div>
+    <React.Fragment>
+      {formulas}
+    </React.Fragment>
   )
 }
 

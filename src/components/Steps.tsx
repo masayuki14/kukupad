@@ -1,4 +1,4 @@
-import React, { ReactComponentElement, ReactElement } from 'react'
+import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
@@ -32,7 +32,7 @@ function Steps({ step = MultiplyStep.Nine, onChange = () => { } }: PropTypes) {
         <Grid item xs={2}>
           <FormLabel>かけざんのだんすう</FormLabel>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <FormControl>
             <RadioGroup row value={selectedValue} defaultValue={step}>
               <FormControlLabel

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const baseStyle = {
   display: 'inline-flex',
@@ -20,10 +20,16 @@ type PropTypes = {
 function Cell({ val, hidden = false, locked = false, noBorder = false, slim = false }: PropTypes) {
 
   const [isHidden, switchHidden] = useState(hidden)
-  const handleTap = () => locked ? null : switchHidden(!isHidden)
-  const bgcolor = () => isHidden ? 'gray' : 'white'
+  const [bgColor, setBgColor] = useState(hidden ? 'gray' : '')
+
+  const handleTap = () => {
+    if (locked) return
+    switchHidden(!isHidden)
+    setBgColor(!isHidden ? 'gray' : '')
+  }
+
   const optionStyle = {
-    backgroundColor: !locked ? bgcolor() : bgcolor(),
+    backgroundColor: bgColor,
     border: noBorder ? '0px' : 'solid black 2px',
     width: slim ? 60 : 120
   }
@@ -32,8 +38,13 @@ function Cell({ val, hidden = false, locked = false, noBorder = false, slim = fa
     baseStyle
   )
 
+  useEffect(() => {
+    switchHidden(hidden)
+    setBgColor(hidden ? 'gray' : '')
+  }, [hidden, locked, val])
+
   return (
-    <div style={style} onTouchEnd={handleTap} onClick={handleTap}>
+    <div style={style} onClick={handleTap}>
       <span> {isHidden ? null : val} </span>
     </div>
   )

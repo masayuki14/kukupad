@@ -32,7 +32,7 @@ function Directions({ direction = SortDirection.Asc, onChange = () => { } }: Pro
         <Grid item xs={2}>
           <FormLabel>じゅんばん</FormLabel>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <FormControl>
             <RadioGroup row value={selectedValue} defaultValue={direction}>
               <FormControlLabel

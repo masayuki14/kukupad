@@ -47,7 +47,7 @@ function Axes({ axis = 1, onChange = () => { } }: PropTypes) {
         <Grid item xs={2}>
           <FormLabel>かけるかず</FormLabel>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <FormControl className={classes.formControl}>
 
             <Select

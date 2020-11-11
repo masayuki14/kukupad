@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import Cell from './Cell'
 import { MaskPosition } from '../enum'
 
@@ -15,7 +14,6 @@ const style = {
   justifyContent: 'center',
   margin: 10
 }
-
 
 function Formula(props: PropTypes) {
 
