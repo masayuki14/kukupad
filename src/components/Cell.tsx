@@ -44,7 +44,7 @@ function Cell({ val, hidden = false, locked = false, noBorder = false, slim = fa
   }, [hidden, locked, val])
 
   return (
-    <div style={style} onTouchEnd={handleTap} onClick={handleTap}>
+    <div style={style} onClick={handleTap}>
       <span> {isHidden ? null : val} </span>
     </div>
   )
