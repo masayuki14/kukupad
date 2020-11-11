@@ -39,3 +39,15 @@ export function convertType(maskType?: MaskType | undefined): MaskPosition {
 
   return position
 }
+
+export enum SortDirection {
+  Asc,
+  Desc,
+  Random
+}
+
+export enum MultiplyStep {
+  Nine = 9,
+  Sixteen = 16,
+  Twenty = 20
+}
