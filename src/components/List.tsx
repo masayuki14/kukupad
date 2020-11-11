@@ -2,8 +2,7 @@ import React from 'react';
 import Formula from './Formula'
 import {
   MaskType,
-  convertType,
-  MultiplyStep
+  convertType
 } from './../enum'
 
 type PropTypes = {
