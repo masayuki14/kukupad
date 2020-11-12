@@ -4,6 +4,7 @@
         "es2021": true
     },
     "extends": [
+        "react-app",
         "plugin:react/recommended",
         "standard"
     ],
@@ -19,5 +20,42 @@
         "react",
         "@typescript-eslint"
     ],
-    "rules": {}
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    },
+    "rules": {
+        "@typescript-eslint/indent": [
+            "error",
+            2
+        ],
+        "@typescript-eslint/prefer-interface": "off",
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [
+                    ".jsx",
+                    ".tsx"
+                ]
+            }
+        ],
+        "react/prop-types": "off",
+        "spaced-comment": [
+            "error",
+            "always",
+            {
+                "markers": [
+                    "/ <reference"
+                ]
+            }
+        ]
+    }
 }
