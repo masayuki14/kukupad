@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 // import logo from './logo.svg';
-import './App.css';
+import './App.css'
 import { MaskType, SortDirection, MultiplyStep } from './enum'
-import Menu from './components/Menu';
+import Menu from './components/Menu'
 import List from './components/List'
 
 const theme = createMuiTheme({
@@ -15,8 +15,28 @@ const theme = createMuiTheme({
 })
 
 const makeSteps = (direction: SortDirection, step: MultiplyStep) => {
-
-  const steps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  const steps = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ]
   let targetSteps: number[] = []
 
   switch (direction) {
@@ -29,8 +49,8 @@ const makeSteps = (direction: SortDirection, step: MultiplyStep) => {
     case SortDirection.Random:
       targetSteps = (([...array]) => {
         for (let i = array.length - 1; i >= 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[array[i], array[j]] = [array[j], array[i]]
         }
         return array
       })(steps.slice(0, step))
@@ -39,7 +59,6 @@ const makeSteps = (direction: SortDirection, step: MultiplyStep) => {
 }
 
 function App() {
-
   const [step, setStep] = React.useState(MultiplyStep.Nine)
   const [mask, setMask] = React.useState(MaskType.Outcome)
   const [direction, setDirection] = React.useState(SortDirection.Random)
@@ -50,7 +69,9 @@ function App() {
   const onChangeDirection = (v: SortDirection) => setDirection(v)
   const onChangeAxis = (v: number) => setAxis(v)
 
-  const [selectedSteps, setSelectedSteps] = React.useState(makeSteps(direction, step))
+  const [selectedSteps, setSelectedSteps] = React.useState(
+    makeSteps(direction, step)
+  )
   const [selectedMask, setSelectedMask] = React.useState(mask)
   const [selectedAxis, setSelectedAxis] = React.useState(axis)
 
@@ -66,18 +87,29 @@ function App() {
       <ThemeProvider theme={theme}>
         <body>
           <div>
-            <Menu step={step} onChangeStep={onChangeStep}
-              mask={mask} onChangeMask={onChangeMask}
-              direction={direction} onChangeDirection={onChangeDirection}
-              axis={axis} onChangeAxis={onChangeAxis}
+            <Menu
+              step={step}
+              onChangeStep={onChangeStep}
+              mask={mask}
+              onChangeMask={onChangeMask}
+              direction={direction}
+              onChangeDirection={onChangeDirection}
+              axis={axis}
+              onChangeAxis={onChangeAxis}
             />
-            <Button variant="contained" color="primary" onClick={flowSettings}>かけざんを始める</Button>
-            <List axis={selectedAxis} mask={selectedMask} steps={selectedSteps} />
+            <Button variant="contained" color="primary" onClick={flowSettings}>
+              かけざんを始める
+            </Button>
+            <List
+              axis={selectedAxis}
+              mask={selectedMask}
+              steps={selectedSteps}
+            />
           </div>
         </body>
       </ThemeProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

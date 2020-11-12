@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 const baseStyle = {
   display: 'inline-flex',
@@ -10,15 +9,20 @@ const baseStyle = {
 }
 
 type PropTypes = {
-  val: number | string,
-  hidden?: boolean,
-  locked?: boolean,
-  noBorder?: boolean,
-  slim?: boolean,
+  val: number | string
+  hidden?: boolean
+  locked?: boolean
+  noBorder?: boolean
+  slim?: boolean
 }
 
-function Cell({ val, hidden = false, locked = false, noBorder = false, slim = false }: PropTypes) {
-
+function Cell({
+  val,
+  hidden = false,
+  locked = false,
+  noBorder = false,
+  slim = false
+}: PropTypes) {
   const [isHidden, switchHidden] = useState(hidden)
   const [bgColor, setBgColor] = useState(hidden ? 'gray' : '')
 
@@ -33,10 +37,7 @@ function Cell({ val, hidden = false, locked = false, noBorder = false, slim = fa
     border: noBorder ? '0px' : 'solid black 2px',
     width: slim ? 60 : 120
   }
-  const style = Object.assign(
-    optionStyle,
-    baseStyle
-  )
+  const style = Object.assign(optionStyle, baseStyle)
 
   useEffect(() => {
     switchHidden(hidden)
@@ -50,4 +51,4 @@ function Cell({ val, hidden = false, locked = false, noBorder = false, slim = fa
   )
 }
 
-export default Cell;
+export default Cell

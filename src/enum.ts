@@ -12,9 +12,9 @@ export enum MaskType {
 }
 
 export function convertType(maskType?: MaskType | undefined): MaskPosition {
-  let position = (function (): MaskPosition {
+  const position = ((): MaskPosition => {
     if (maskType === MaskType.Random) {
-      let v = Math.floor((Math.random() * 10000)) % 3
+      const v = Math.floor(Math.random() * 10000) % 3
       switch (v) {
         case 0:
           return MaskPosition.Left
