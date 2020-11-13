@@ -18,6 +18,7 @@ jobs:
 
       - name: copy ssh key
         run: |
+          mkdir -m 700 ~/.ssh
           echo "$PRIVATE_KEY" > ~/.ssh/github_rsa
           chmod 600 ~/.ssh/github_rsa
         env:
