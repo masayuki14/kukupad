@@ -42,4 +42,4 @@ jobs:
         run: yarn build
 
       - name: deploy
-        run: yarn deploy
+        run: gh-pages -d build -r https://github.com/masayuki14/kukupad.git
