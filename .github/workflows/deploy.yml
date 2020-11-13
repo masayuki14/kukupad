@@ -16,6 +16,11 @@ jobs:
         with:
           node-version: 15.x
 
+      - name: setup git
+        run: |
+          git config --global user.email "masayuki144@gmail.com"
+          git config --global user.name "On github workflow"
+
       - name: install package
         run: yarn
 
