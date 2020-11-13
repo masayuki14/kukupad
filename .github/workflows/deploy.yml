@@ -9,31 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
       - name: setup node.jobs
         uses: actions/setup-node@v1
         with:
           node-version: 15.x
 
-      - name: copy ssh key
-        run: |
-          mkdir -m 700 ~/.ssh
-          echo "$PRIVATE_KEY" > ~/.ssh/github_rsa
-          chmod 600 ~/.ssh/github_rsa
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      - uses: actions/checkout@v2
 
       - name: setup git
         run: |
-          git config --global user.email "masayuki144@gmail.com"
-          git config --global user.name "Masayuki Morisaki"
-          cat <<-EOF
-            Host github.com
-              User git
-              HostName github.com
-              IdentityFile ~/.ssh/github_rsa
-          EOF
+          git config user.email "masayuki144@gmail.com"
+          git config user.name "Masayuki Morisaki"
 
       - name: install package
         run: yarn
@@ -42,4 +28,4 @@ jobs:
         run: yarn build
 
       - name: deploy
-        run: npx gh-pages -d build -r https://github.com/masayuki14/kukupad.git
+        run: npx gh-pages -d build
