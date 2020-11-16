@@ -11,7 +11,7 @@ type PropTypes = {
 
 function List(props: PropTypes) {
   const formulas = props.steps.map((v, i) => (
-    <Grid item xs={12} sm={6} lg={4} key={i}>
+    <Grid item key={i} xs={12}>
       <Formula
         key={i}
         left={props.axis}
