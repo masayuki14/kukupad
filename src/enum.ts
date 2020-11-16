@@ -1,13 +1,15 @@
 export enum MaskPosition {
   Left,
   Right,
-  Outcome
+  Outcome,
+  None
 }
 
 export enum MaskType {
   Left,
   Right,
   Outcome,
+  None,
   Random
 }
 
@@ -22,6 +24,8 @@ export function convertType(maskType?: MaskType | undefined): MaskPosition {
           return MaskPosition.Right
         case 2:
           return MaskPosition.Outcome
+        case 3:
+          return MaskPosition.None
       }
       return MaskPosition.Outcome
     }
@@ -33,6 +37,8 @@ export function convertType(maskType?: MaskType | undefined): MaskPosition {
         return MaskPosition.Right
       case MaskType.Outcome:
         return MaskPosition.Outcome
+      case MaskType.None:
+        return MaskPosition.None
     }
     return MaskPosition.Outcome
   })()

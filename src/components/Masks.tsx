@@ -55,6 +55,12 @@ function Masks({ mask = MaskType.Outcome, onChange = () => {} }: PropTypes) {
                 label="ばらばら"
                 labelPlacement="top"
               />
+              <FormControlLabel
+                value={MaskType.None}
+                control={<Radio color="primary" onChange={handleChange} />}
+                label="かくさない"
+                labelPlacement="top"
+              />
             </RadioGroup>
           </FormControl>
         </Grid>
