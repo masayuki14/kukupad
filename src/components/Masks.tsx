@@ -28,7 +28,7 @@ function Masks({ mask = MaskType.Outcome, onChange = () => {} }: PropTypes) {
         <Grid item xs={12} sm={2}>
           <FormLabel>かくすばしょ</FormLabel>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <FormControl>
             <RadioGroup row value={selectedValue} defaultValue={mask}>
               <FormControlLabel

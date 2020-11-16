@@ -80,7 +80,7 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
         <Grid item xs={6} sm={2}>
           <FormLabel>かけるかず</FormLabel>
         </Grid>
-        <Grid item xs={6} sm={4}>
+        <Grid item xs={6} sm={6}>
           <IconButton color="primary" component="span" onClick={handleMinus}>
             <RemoveCircleIcon fontSize="large" />
           </IconButton>
