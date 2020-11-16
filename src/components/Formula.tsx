@@ -23,13 +23,13 @@ function Formula(props: PropTypes) {
         hidden={props.mask === MaskPosition.Left}
         locked={props.mask !== MaskPosition.Left}
       />
-      <Cell val="×" noBorder={true} slim={true} />
+      <Cell val="×" noBorder={true} slim={true} locked={true} />
       <Cell
         val={props.right}
         hidden={props.mask === MaskPosition.Right}
         locked={props.mask !== MaskPosition.Right}
       />
-      <Cell val="＝" noBorder={true} slim={true} />
+      <Cell val="＝" noBorder={true} slim={true} locked={true} />
       <Cell
         val={props.outcome}
         hidden={props.mask === MaskPosition.Outcome}

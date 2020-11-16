@@ -1,4 +1,5 @@
 import React from 'react'
+import Grid from '@material-ui/core/Grid'
 import Formula from './Formula'
 import { MaskType, convertType } from './../enum'
 
@@ -10,16 +11,24 @@ type PropTypes = {
 
 function List(props: PropTypes) {
   const formulas = props.steps.map((v, i) => (
-    <Formula
-      key={i}
-      left={props.axis}
-      right={v}
-      outcome={props.axis * v}
-      mask={convertType(props.mask)}
-    />
+    <Grid item key={i} xs={12}>
+      <Formula
+        key={i}
+        left={props.axis}
+        right={v}
+        outcome={props.axis * v}
+        mask={convertType(props.mask)}
+      />
+    </Grid>
   ))
 
-  return <React.Fragment>{formulas}</React.Fragment>
+  return (
+    <React.Fragment>
+      <Grid container direction="row" justify="flex-start" alignItems="center">
+        {formulas}
+      </Grid>
+    </React.Fragment>
+  )
 }
 
 export default List

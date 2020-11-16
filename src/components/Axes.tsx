@@ -77,10 +77,10 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
     <React.Fragment>
       <CssBaseline />
       <Grid container direction="row" justify="center" alignItems="center">
-        <Grid item xs={2}>
+        <Grid item xs={6} sm={2}>
           <FormLabel>かけるかず</FormLabel>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6} sm={4}>
           <IconButton color="primary" component="span" onClick={handleMinus}>
             <RemoveCircleIcon fontSize="large" />
           </IconButton>
