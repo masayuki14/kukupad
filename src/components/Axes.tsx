@@ -6,6 +6,9 @@ import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
+import IconButton from '@material-ui/core/IconButton'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,13 +27,7 @@ type PropTypes = {
 function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
   const classes = useStyles()
   const [selectedValue, setSelectedValue] = React.useState(axis)
-
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSelectedValue(Number(event.target.value))
-    if (onChange) onChange(Number(event.target.value))
-  }
-
-  const items = [
+  const values = [
     1,
     2,
     3,
@@ -51,7 +48,24 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
     18,
     19,
     20
-  ].map((v, i) => {
+  ]
+
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedValue(Number(event.target.value))
+    if (onChange) onChange(Number(event.target.value))
+  }
+  const handlePlus = () => {
+    if (selectedValue === values[values.length - 1]) return
+    setSelectedValue(selectedValue + 1)
+    if (onChange) onChange(selectedValue + 1)
+  }
+  const handleMinus = () => {
+    if (selectedValue === values[0]) return false
+    setSelectedValue(selectedValue - 1)
+    if (onChange) onChange(selectedValue - 1)
+  }
+
+  const items = values.map((v, i) => {
     return (
       <MenuItem key={i} value={v}>
         {v}
@@ -67,6 +81,9 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
           <FormLabel>かけるかず</FormLabel>
         </Grid>
         <Grid item xs={6} sm={4}>
+          <IconButton color="primary" component="span" onClick={handleMinus}>
+            <RemoveCircleIcon fontSize="large" />
+          </IconButton>
           <FormControl className={classes.formControl}>
             <Select
               labelId="demo-simple-select-label"
@@ -77,6 +94,9 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
               {items}
             </Select>
           </FormControl>
+          <IconButton color="primary" component="span" onClick={handlePlus}>
+            <AddCircleIcon fontSize="large" />
+          </IconButton>
         </Grid>
       </Grid>
     </React.Fragment>
