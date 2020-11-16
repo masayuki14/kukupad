@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/kukupad/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/kukupad/static/js/main.2821e02c.chunk.js",
-    "main.js.map": "/kukupad/static/js/main.2821e02c.chunk.js.map",
+    "main.js": "/kukupad/static/js/main.f08671e0.chunk.js",
+    "main.js.map": "/kukupad/static/js/main.f08671e0.chunk.js.map",
     "runtime-main.js": "/kukupad/static/js/runtime-main.698a3319.js",
     "runtime-main.js.map": "/kukupad/static/js/runtime-main.698a3319.js.map",
     "static/js/2.fd19ecad.chunk.js": "/kukupad/static/js/2.fd19ecad.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.698a3319.js",
     "static/js/2.fd19ecad.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.2821e02c.chunk.js"
+    "static/js/main.f08671e0.chunk.js"
   ]
 }
