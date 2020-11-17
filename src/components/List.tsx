@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Formula from './Formula'
 import { MaskType, convertType } from './../enum'
+import RubyTexts from '../ruby_texts'
 
 type PropTypes = {
   steps: number[]
@@ -18,6 +19,10 @@ function List(props: PropTypes) {
         right={v}
         outcome={props.axis * v}
         mask={convertType(props.mask)}
+        rtLeft={RubyTexts[props.axis]?.[v]?.[0]}
+        rtRight={RubyTexts[props.axis]?.[v]?.[1]}
+        rtEqual={RubyTexts[props.axis]?.[v]?.[2]}
+        rtOutcome={RubyTexts[props.axis]?.[v]?.[3]}
       />
     </Grid>
   ))
