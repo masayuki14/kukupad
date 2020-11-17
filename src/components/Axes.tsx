@@ -52,17 +52,17 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedValue(Number(event.target.value))
-    if (onChange) onChange(Number(event.target.value))
+    onChange(Number(event.target.value))
   }
   const handlePlus = () => {
     if (selectedValue === values[values.length - 1]) return
     setSelectedValue(selectedValue + 1)
-    if (onChange) onChange(selectedValue + 1)
+    onChange(selectedValue + 1)
   }
   const handleMinus = () => {
-    if (selectedValue === values[0]) return false
+    if (selectedValue === values[0]) return
     setSelectedValue(selectedValue - 1)
-    if (onChange) onChange(selectedValue - 1)
+    onChange(selectedValue - 1)
   }
 
   const items = values.map((v, i) => {
