@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/kukupad/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/kukupad/static/js/main.f08671e0.chunk.js",
-    "main.js.map": "/kukupad/static/js/main.f08671e0.chunk.js.map",
+    "main.js": "/kukupad/static/js/main.1ac5a8d8.chunk.js",
+    "main.js.map": "/kukupad/static/js/main.1ac5a8d8.chunk.js.map",
     "runtime-main.js": "/kukupad/static/js/runtime-main.698a3319.js",
     "runtime-main.js.map": "/kukupad/static/js/runtime-main.698a3319.js.map",
-    "static/js/2.fd19ecad.chunk.js": "/kukupad/static/js/2.fd19ecad.chunk.js",
-    "static/js/2.fd19ecad.chunk.js.map": "/kukupad/static/js/2.fd19ecad.chunk.js.map",
+    "static/js/2.9636cd19.chunk.js": "/kukupad/static/js/2.9636cd19.chunk.js",
+    "static/js/2.9636cd19.chunk.js.map": "/kukupad/static/js/2.9636cd19.chunk.js.map",
     "static/js/3.2e84ac2e.chunk.js": "/kukupad/static/js/3.2e84ac2e.chunk.js",
     "static/js/3.2e84ac2e.chunk.js.map": "/kukupad/static/js/3.2e84ac2e.chunk.js.map",
     "index.html": "/kukupad/index.html",
     "static/css/main.8c8b27cf.chunk.css.map": "/kukupad/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.fd19ecad.chunk.js.LICENSE.txt": "/kukupad/static/js/2.fd19ecad.chunk.js.LICENSE.txt"
+    "static/js/2.9636cd19.chunk.js.LICENSE.txt": "/kukupad/static/js/2.9636cd19.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.698a3319.js",
-    "static/js/2.fd19ecad.chunk.js",
+    "static/js/2.9636cd19.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.f08671e0.chunk.js"
+    "static/js/main.1ac5a8d8.chunk.js"
   ]
 }
