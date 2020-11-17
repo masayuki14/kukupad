@@ -1,6 +1,17 @@
 import React from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Cell from './Cell'
 import { MaskPosition } from '../enum'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    base: {
+      display: 'flex',
+      justifyContent: 'center',
+      margin: theme.spacing(1)
+    }
+  })
+)
 
 type PropTypes = {
   left: number
@@ -13,15 +24,10 @@ type PropTypes = {
   rtOutcome?: string
 }
 
-const style = {
-  display: 'flex',
-  justifyContent: 'center',
-  margin: 10
-}
-
 function Formula(props: PropTypes) {
+  const classes = useStyles()
   return (
-    <div style={style}>
+    <div className={classes.base}>
       <Cell
         val={props.left}
         hidden={props.mask === MaskPosition.Left}

@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
-const baseStyle = {
-  display: 'inline-flex',
-  height: 120,
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontSize: '3rem'
-}
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    rt: {
+      fontSize: '0.7rem'
+    },
+    base: (props: { noBorder?: boolean; slim?: boolean }) => ({
+      border: props.noBorder ? '0px' : 'solid black 2px',
+      width: props.slim ? 60 : 120,
+      display: 'inline-flex',
+      height: 120,
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '3rem',
+      margin: theme.spacing(1)
+    })
+  })
+)
 
 type PropTypes = {
   val: number | string
@@ -25,6 +36,8 @@ function Cell({
   noBorder = false,
   slim = false
 }: PropTypes) {
+  const classes = useStyles({ noBorder, slim })
+
   const [isHidden, switchHidden] = useState(hidden)
   const [bgColor, setBgColor] = useState(hidden ? 'gray' : '')
 
@@ -35,11 +48,8 @@ function Cell({
   }
 
   const optionStyle = {
-    backgroundColor: bgColor,
-    border: noBorder ? '0px' : 'solid black 2px',
-    width: slim ? 60 : 120
+    backgroundColor: bgColor
   }
-  const style = Object.assign(optionStyle, baseStyle)
 
   useEffect(() => {
     switchHidden(hidden)
@@ -47,12 +57,12 @@ function Cell({
   }, [hidden, locked, val])
 
   return (
-    <div style={style} onClick={handleTap}>
+    <div className={classes.base} style={optionStyle} onClick={handleTap}>
       {isHidden ? null : (
         <ruby>
           <span> {val} </span>
           <rp>（</rp>
-          <rt style={{ fontSize: '0.7rem', marginBottom: 5 }}>{rt}</rt>
+          <rt className={classes.rt}>{rt}</rt>
           <rp>）</rp>
         </ruby>
       )}
