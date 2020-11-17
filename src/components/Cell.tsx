@@ -10,6 +10,7 @@ const baseStyle = {
 
 type PropTypes = {
   val: number | string
+  rt?: string
   hidden?: boolean
   locked?: boolean
   noBorder?: boolean
@@ -18,6 +19,7 @@ type PropTypes = {
 
 function Cell({
   val,
+  rt = '',
   hidden = false,
   locked = false,
   noBorder = false,
@@ -46,7 +48,14 @@ function Cell({
 
   return (
     <div style={style} onClick={handleTap}>
-      <span> {isHidden ? null : val} </span>
+      {isHidden ? null : (
+        <ruby>
+          <span> {val} </span>
+          <rp>（</rp>
+          <rt style={{ fontSize: '0.7rem', marginBottom: 5 }}>{rt}</rt>
+          <rp>）</rp>
+        </ruby>
+      )}
     </div>
   )
 }
