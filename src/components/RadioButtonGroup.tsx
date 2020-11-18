@@ -27,7 +27,7 @@ type PropTypes<T> = {
 function RadioButtonGroup<T>({
   items,
   initial = undefined,
-  width = 88,
+  width = 104,
   onChange = () => {}
 }: PropTypes<T>) {
   const classes = useStyles({ width })

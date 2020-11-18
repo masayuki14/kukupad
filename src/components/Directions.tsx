@@ -50,7 +50,6 @@ function Directions({
               items={items}
               initial={direction}
               onChange={onChange}
-              width={104}
             />
           </FormControl>
         </Grid>

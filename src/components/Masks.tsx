@@ -46,7 +46,6 @@ function Masks({ mask = MaskType.Outcome, onChange = () => {} }: PropTypes) {
               items={items}
               initial={mask}
               onChange={onChange}
-              width={104}
             />
           </FormControl>
         </Grid>
