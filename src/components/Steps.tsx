@@ -1,13 +1,7 @@
 import React from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import {
-  CssBaseline,
-  Grid,
-  ButtonGroup,
-  Button,
-  FormControl,
-  FormLabel
-} from '@material-ui/core'
+import { CssBaseline, Grid, FormControl, FormLabel } from '@material-ui/core'
+import RadioButtonGroup from './RadioButtonGroup'
 import { MultiplyStep } from './../enum'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,48 +22,11 @@ type PropTypes = {
 
 function Steps({ step = MultiplyStep.Nine, onChange = () => {} }: PropTypes) {
   const classes = useStyles()
-  const [selectedValue, setSelectedValue] = React.useState(step)
-
-  const handleClick = (value: MultiplyStep) => {
-    return () => {
-      setSelectedValue(value)
-      if (onChange) onChange(value)
-    }
-  }
-
-  const buttons = (
-    <ButtonGroup
-      variant="contained"
-      color="primary"
-      aria-label="contained primary button group"
-    >
-      <Button
-        className={classes.button}
-        variant={selectedValue === MultiplyStep.Nine ? 'contained' : 'outlined'}
-        onClick={handleClick(MultiplyStep.Nine)}
-      >
-        9 × 9
-      </Button>
-      <Button
-        className={classes.button}
-        variant={
-          selectedValue === MultiplyStep.Sixteen ? 'contained' : 'outlined'
-        }
-        onClick={handleClick(MultiplyStep.Sixteen)}
-      >
-        16 × 16
-      </Button>
-      <Button
-        className={classes.button}
-        variant={
-          selectedValue === MultiplyStep.Twenty ? 'contained' : 'outlined'
-        }
-        onClick={handleClick(MultiplyStep.Twenty)}
-      >
-        20 × 20
-      </Button>
-    </ButtonGroup>
-  )
+  const items = [
+    { value: MultiplyStep.Nine, label: '9 × 9' },
+    { value: MultiplyStep.Sixteen, label: '16 × 16' },
+    { value: MultiplyStep.Twenty, label: '20 × 20' }
+  ]
 
   return (
     <React.Fragment>
@@ -85,7 +42,13 @@ function Steps({ step = MultiplyStep.Nine, onChange = () => {} }: PropTypes) {
           <FormLabel>かけざんのだんすう</FormLabel>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl>{buttons}</FormControl>
+          <FormControl>
+            <RadioButtonGroup<MultiplyStep>
+              items={items}
+              initial={step}
+              onChange={onChange}
+            />
+          </FormControl>
         </Grid>
       </Grid>
     </React.Fragment>
