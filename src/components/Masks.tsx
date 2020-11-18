@@ -1,12 +1,16 @@
 import React from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Grid from '@material-ui/core/Grid'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { CssBaseline, Grid, FormControl, FormLabel } from '@material-ui/core'
+import RadioButtonGroup from './RadioButtonGroup'
 import { MaskType } from '../enum'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    grid: {
+      margin: theme.spacing(1)
+    }
+  })
+)
 
 type PropTypes = {
   mask?: MaskType
@@ -14,54 +18,35 @@ type PropTypes = {
 }
 
 function Masks({ mask = MaskType.Outcome, onChange = () => {} }: PropTypes) {
-  const [selectedValue, setSelectedValue] = React.useState(mask)
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(Number(event.target.value))
-    if (onChange) onChange(Number(event.target.value))
-  }
+  const classes = useStyles()
+  const items = [
+    { value: MaskType.Left, label: 'ひだり' },
+    { value: MaskType.Right, label: 'みぎ' },
+    { value: MaskType.Outcome, label: 'こたえ' },
+    { value: MaskType.Random, label: 'ばらばら' },
+    { value: MaskType.None, label: 'かくさない' }
+  ]
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid
+        className={classes.grid}
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
         <Grid item xs={12} sm={2}>
           <FormLabel>かくすばしょ</FormLabel>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl>
-            <RadioGroup row value={selectedValue} defaultValue={mask}>
-              <FormControlLabel
-                value={MaskType.Left}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="ひだり"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MaskType.Right}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="みぎ"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MaskType.Outcome}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="こたえ"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MaskType.Random}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="ばらばら"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MaskType.None}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="かくさない"
-                labelPlacement="top"
-              />
-            </RadioGroup>
+            <RadioButtonGroup
+              items={items}
+              initial={mask}
+              onChange={onChange}
+            />
           </FormControl>
         </Grid>
       </Grid>

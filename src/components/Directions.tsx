@@ -1,12 +1,19 @@
 import React from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
+import RadioButtonGroup from './RadioButtonGroup'
 import { SortDirection } from './../enum'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    grid: {
+      margin: theme.spacing(1)
+    }
+  })
+)
 
 type PropTypes = {
   direction?: SortDirection
@@ -17,42 +24,33 @@ function Directions({
   direction = SortDirection.Asc,
   onChange = () => {}
 }: PropTypes) {
-  const [selectedValue, setSelectedValue] = React.useState(direction)
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(Number(event.target.value))
-    if (onChange) onChange(Number(event.target.value))
-  }
+  const classes = useStyles()
+  const items = [
+    { value: SortDirection.Asc, label: 'うえから' },
+    { value: SortDirection.Desc, label: 'したから' },
+    { value: SortDirection.Random, label: 'ばらばら' }
+  ]
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid
+        className={classes.grid}
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
         <Grid item xs={12} sm={2}>
           <FormLabel>じゅんばん</FormLabel>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl>
-            <RadioGroup row value={selectedValue} defaultValue={direction}>
-              <FormControlLabel
-                value={SortDirection.Asc}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="うえから"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={SortDirection.Desc}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="したから"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={SortDirection.Random}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="ばらばら"
-                labelPlacement="top"
-              />
-            </RadioGroup>
+            <RadioButtonGroup
+              items={items}
+              initial={direction}
+              onChange={onChange}
+            />
           </FormControl>
         </Grid>
       </Grid>

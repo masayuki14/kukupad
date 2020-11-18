@@ -1,12 +1,16 @@
 import React from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Grid from '@material-ui/core/Grid'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { CssBaseline, Grid, FormControl, FormLabel } from '@material-ui/core'
+import RadioButtonGroup from './RadioButtonGroup'
 import { MultiplyStep } from './../enum'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    grid: {
+      margin: theme.spacing(1)
+    }
+  })
+)
 
 type PropTypes = {
   step?: MultiplyStep
@@ -14,42 +18,33 @@ type PropTypes = {
 }
 
 function Steps({ step = MultiplyStep.Nine, onChange = () => {} }: PropTypes) {
-  const [selectedValue, setSelectedValue] = React.useState(step)
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(Number(event.target.value))
-    if (onChange) onChange(Number(event.target.value))
-  }
+  const classes = useStyles()
+  const items = [
+    { value: MultiplyStep.Nine, label: '9 × 9' },
+    { value: MultiplyStep.Sixteen, label: '16 × 16' },
+    { value: MultiplyStep.Twenty, label: '20 × 20' }
+  ]
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        className={classes.grid}
+      >
         <Grid item xs={12} sm={2}>
           <FormLabel>かけざんのだんすう</FormLabel>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl>
-            <RadioGroup row value={selectedValue} defaultValue={step}>
-              <FormControlLabel
-                value={MultiplyStep.Nine}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="9"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MultiplyStep.Sixteen}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="16"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MultiplyStep.Twenty}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="20"
-                labelPlacement="top"
-              />
-            </RadioGroup>
+            <RadioButtonGroup<MultiplyStep>
+              items={items}
+              initial={step}
+              onChange={onChange}
+            />
           </FormControl>
         </Grid>
       </Grid>
