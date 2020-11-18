@@ -8,9 +8,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grid: {
       margin: theme.spacing(1)
-    },
-    button: {
-      width: 88
     }
   })
 )

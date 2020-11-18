@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120
+    },
+    grid: {
+      margin: theme.spacing(1)
     }
   })
 )
@@ -76,7 +79,13 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid
+        className={classes.grid}
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
         <Grid item xs={6} sm={2}>
           <FormLabel>かけるかず</FormLabel>
         </Grid>
