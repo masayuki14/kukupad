@@ -1,15 +1,15 @@
 import React from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import { ButtonGroup, Button, ThemeProvider } from '@material-ui/core'
+import { ButtonGroup, Button } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grid: {
       margin: theme.spacing(1)
     },
-    button: {
-      width: 88
-    }
+    button: (props: { width: number }) => ({
+      width: props.width
+    })
   })
 )
 
@@ -20,15 +20,17 @@ type Item<T> = {
 type PropTypes<T> = {
   items: Item<T>[]
   initial?: T
+  width?: number
   onChange?: (v: T) => void
 }
 
 function RadioButtonGroup<T>({
   items,
   initial = undefined,
+  width = 88,
   onChange = () => {}
 }: PropTypes<T>) {
-  const classes = useStyles()
+  const classes = useStyles({ width })
   const [selectedValue, setSelectedValue] = React.useState(initial)
 
   const handleChange = (value: T) => {
