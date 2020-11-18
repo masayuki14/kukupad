@@ -1,12 +1,25 @@
 import React from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Grid from '@material-ui/core/Grid'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import {
+  CssBaseline,
+  Grid,
+  ButtonGroup,
+  Button,
+  FormControl,
+  FormLabel
+} from '@material-ui/core'
 import { MultiplyStep } from './../enum'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    grid: {
+      margin: theme.spacing(1)
+    },
+    button: {
+      width: 88
+    }
+  })
+)
 
 type PropTypes = {
   step?: MultiplyStep
@@ -14,43 +27,65 @@ type PropTypes = {
 }
 
 function Steps({ step = MultiplyStep.Nine, onChange = () => {} }: PropTypes) {
+  const classes = useStyles()
   const [selectedValue, setSelectedValue] = React.useState(step)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(Number(event.target.value))
-    if (onChange) onChange(Number(event.target.value))
+  const handleClick = (value: MultiplyStep) => {
+    return () => {
+      setSelectedValue(value)
+      if (onChange) onChange(value)
+    }
   }
+
+  const buttons = (
+    <ButtonGroup
+      variant="contained"
+      color="primary"
+      aria-label="contained primary button group"
+    >
+      <Button
+        className={classes.button}
+        variant={selectedValue === MultiplyStep.Nine ? 'contained' : 'outlined'}
+        onClick={handleClick(MultiplyStep.Nine)}
+      >
+        9 × 9
+      </Button>
+      <Button
+        className={classes.button}
+        variant={
+          selectedValue === MultiplyStep.Sixteen ? 'contained' : 'outlined'
+        }
+        onClick={handleClick(MultiplyStep.Sixteen)}
+      >
+        16 × 16
+      </Button>
+      <Button
+        className={classes.button}
+        variant={
+          selectedValue === MultiplyStep.Twenty ? 'contained' : 'outlined'
+        }
+        onClick={handleClick(MultiplyStep.Twenty)}
+      >
+        20 × 20
+      </Button>
+    </ButtonGroup>
+  )
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        className={classes.grid}
+      >
         <Grid item xs={12} sm={2}>
           <FormLabel>かけざんのだんすう</FormLabel>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl>
-            <RadioGroup row value={selectedValue} defaultValue={step}>
-              <FormControlLabel
-                value={MultiplyStep.Nine}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="9"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MultiplyStep.Sixteen}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="16"
-                labelPlacement="top"
-              />
-              <FormControlLabel
-                value={MultiplyStep.Twenty}
-                control={<Radio color="primary" onChange={handleChange} />}
-                label="20"
-                labelPlacement="top"
-              />
-            </RadioGroup>
-          </FormControl>
+          <FormControl>{buttons}</FormControl>
         </Grid>
       </Grid>
     </React.Fragment>
