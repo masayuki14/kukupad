@@ -97,8 +97,12 @@ function App() {
               axis={axis}
               onChangeAxis={onChangeAxis}
             />
-            <Button variant="contained" color="primary" onClick={flowSettings}>
-              かけざんを始める
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={flowSettings}
+            >
+              かけざんをはじめる
             </Button>
             <List
               axis={selectedAxis}
