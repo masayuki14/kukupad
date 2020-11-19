@@ -24,34 +24,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type PropTypes = {
   axis?: number
+  max?: number
   onChange?: (v: number) => void
 }
 
-function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
+const axisNumbers = (max: number) =>
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].slice(
+    0,
+    max
+  )
+
+function Axes({ axis = 1, max = 20, onChange = () => {} }: PropTypes) {
   const classes = useStyles()
   const [selectedValue, setSelectedValue] = React.useState(axis)
-  const values = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20
-  ]
+  const values = axisNumbers(max)
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedValue(Number(event.target.value))
@@ -75,6 +61,10 @@ function Axes({ axis = 1, onChange = () => {} }: PropTypes) {
       </MenuItem>
     )
   })
+
+  React.useEffect(() => {
+    if (selectedValue > max) setSelectedValue(max)
+  }, [selectedValue, max])
 
   return (
     <React.Fragment>
