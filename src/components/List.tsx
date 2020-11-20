@@ -10,7 +10,22 @@ type PropTypes = {
   mask?: MaskType
 }
 
+const makeMasks = (mask: MaskType | undefined, size: number) => {
+  const result = []
+  for (let i = 0; i < size; i++) {
+    result.push(convertType(mask))
+  }
+  return result
+}
+
 function List(props: PropTypes) {
+  const [masks, setMasks] = React.useState(
+    makeMasks(props.mask, props.steps.length)
+  )
+  React.useEffect(() => {
+    setMasks(makeMasks(props.mask, props.steps.length))
+  }, [props.mask, props.steps])
+
   const formulas = props.steps.map((v, i) => (
     <Grid item key={i} xs={12}>
       <Formula
@@ -18,7 +33,7 @@ function List(props: PropTypes) {
         left={props.axis}
         right={v}
         outcome={props.axis * v}
-        mask={convertType(props.mask)}
+        mask={masks[i]}
         rtLeft={RubyTexts[props.axis]?.[v]?.[0]}
         rtRight={RubyTexts[props.axis]?.[v]?.[1]}
         rtEqual={RubyTexts[props.axis]?.[v]?.[2]}
