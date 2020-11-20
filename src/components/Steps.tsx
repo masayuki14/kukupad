@@ -40,7 +40,7 @@ function Steps({ step = MultiplyStep.Nine, onChange = () => {} }: PropTypes) {
         </Grid>
         <Grid item xs={12} sm={8}>
           <FormControl>
-            <RadioButtonGroup<MultiplyStep>
+            <RadioButtonGroup
               items={items}
               initial={step}
               onChange={onChange}
