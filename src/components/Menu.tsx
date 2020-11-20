@@ -32,7 +32,7 @@ function Menu({
       <Steps step={step} onChange={onChangeStep} />
       <Masks mask={mask} onChange={onChangeMask} />
       <Directions direction={direction} onChange={onChangeDirection} />
-      <Axes axis={axis} onChange={onChangeAxis} />
+      <Axes axis={axis} onChange={onChangeAxis} max={step} />
     </div>
   )
 }

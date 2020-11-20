@@ -2,11 +2,10 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Formula from './Formula'
 import { MaskType, convertType } from './../enum'
-import RubyTexts from '../ruby_texts'
+import { RubyTexts } from '../constants'
 
 type PropTypes = {
-  steps: number[]
-  axis: number
+  pairs: { axis: number; step: number }[]
   mask?: MaskType
 }
 
@@ -20,24 +19,24 @@ const makeMasks = (mask: MaskType | undefined, size: number) => {
 
 function List(props: PropTypes) {
   const [masks, setMasks] = React.useState(
-    makeMasks(props.mask, props.steps.length)
+    makeMasks(props.mask, props.pairs.length)
   )
   React.useEffect(() => {
-    setMasks(makeMasks(props.mask, props.steps.length))
-  }, [props.mask, props.steps])
+    setMasks(makeMasks(props.mask, props.pairs.length))
+  }, [props.mask, props.pairs])
 
-  const formulas = props.steps.map((v, i) => (
+  const formulas2 = props.pairs?.map((pair, i) => (
     <Grid item key={i} xs={12}>
       <Formula
         key={i}
-        left={props.axis}
-        right={v}
-        outcome={props.axis * v}
+        left={pair.axis}
+        right={pair.step}
+        outcome={pair.axis * pair.step}
         mask={masks[i]}
-        rtLeft={RubyTexts[props.axis]?.[v]?.[0]}
-        rtRight={RubyTexts[props.axis]?.[v]?.[1]}
-        rtEqual={RubyTexts[props.axis]?.[v]?.[2]}
-        rtOutcome={RubyTexts[props.axis]?.[v]?.[3]}
+        rtLeft={RubyTexts[pair.axis]?.[pair.step]?.[0]}
+        rtRight={RubyTexts[pair.axis]?.[pair.step]?.[1]}
+        rtEqual={RubyTexts[pair.axis]?.[pair.step]?.[2]}
+        rtOutcome={RubyTexts[pair.axis]?.[pair.step]?.[3]}
       />
     </Grid>
   ))
@@ -45,7 +44,7 @@ function List(props: PropTypes) {
   return (
     <React.Fragment>
       <Grid container direction="row" justify="flex-start" alignItems="center">
-        {formulas}
+        {formulas2}
       </Grid>
     </React.Fragment>
   )

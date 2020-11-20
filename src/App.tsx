@@ -8,6 +8,8 @@ import { MaskType, SortDirection, MultiplyStep } from './enum'
 import Menu from './components/Menu'
 import List from './components/List'
 
+import { RANDOM_AXIS } from './constants'
+
 const theme = createMuiTheme({
   palette: {
     type: 'light'
@@ -58,6 +60,26 @@ const makeSteps = (direction: SortDirection, step: MultiplyStep) => {
   return targetSteps
 }
 
+const makePairs = (
+  axis: number,
+  direction: SortDirection,
+  step: MultiplyStep
+) => {
+  const steps = makeSteps(direction, step)
+  let result: { axis: number; step: number }[]
+
+  if (axis === RANDOM_AXIS) {
+    result = steps.map((s) => ({
+      step: s,
+      axis: (Math.floor(Math.random() * 1000000) % step) + 1
+    }))
+  } else {
+    result = steps.map((s) => ({ axis, step: s }))
+  }
+
+  return result
+}
+
 function App() {
   const [step, setStep] = React.useState(MultiplyStep.Nine)
   const [mask, setMask] = React.useState(MaskType.Outcome)
@@ -69,17 +91,15 @@ function App() {
   const onChangeDirection = (v: SortDirection) => setDirection(v)
   const onChangeAxis = (v: number) => setAxis(v)
 
-  const [selectedSteps, setSelectedSteps] = React.useState(
-    makeSteps(direction, step)
+  const [selectedMask, setSelectedMask] = React.useState(MaskType.Outcome)
+  const [pairs, setPairs] = React.useState(
+    makePairs(1, SortDirection.Random, MultiplyStep.Nine)
   )
-  const [selectedMask, setSelectedMask] = React.useState(mask)
-  const [selectedAxis, setSelectedAxis] = React.useState(axis)
 
   // ボタンタップで設定を反映させる
   const flowSettings = () => {
     setSelectedMask(mask)
-    setSelectedSteps(makeSteps(direction, step))
-    setSelectedAxis(axis)
+    setPairs(makePairs(axis, direction, step))
   }
 
   return (
@@ -104,11 +124,7 @@ function App() {
             >
               かけざんをはじめる
             </Button>
-            <List
-              axis={selectedAxis}
-              mask={selectedMask}
-              steps={selectedSteps}
-            />
+            <List mask={selectedMask} pairs={pairs} />
           </div>
         </body>
       </ThemeProvider>
