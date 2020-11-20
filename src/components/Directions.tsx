@@ -44,7 +44,7 @@ function Directions({
         <Grid item xs={12} sm={2}>
           <FormLabel>じゅんばん</FormLabel>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={8}>
           <FormControl>
             <RadioButtonGroup
               items={items}

@@ -76,10 +76,10 @@ function Axes({ axis = 1, max = 20, onChange = () => {} }: PropTypes) {
         justify="center"
         alignItems="center"
       >
-        <Grid item xs={6} sm={2}>
+        <Grid item xs={12} sm={2}>
           <FormLabel>かけるかず</FormLabel>
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={12} sm={8}>
           <IconButton color="primary" component="span" onClick={handleMinus}>
             <RemoveCircleIcon fontSize="large" />
           </IconButton>
