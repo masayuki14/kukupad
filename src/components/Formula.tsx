@@ -8,7 +8,11 @@ const useStyles = makeStyles((theme: Theme) =>
     base: {
       display: 'flex',
       justifyContent: 'center',
-      margin: theme.spacing(1)
+      margin: theme.spacing(1),
+      [theme.breakpoints.down('sm')]: {
+        marginRight: theme.spacing(0),
+        marginLeft: theme.spacing(0)
+      }
     }
   })
 )

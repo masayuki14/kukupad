@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       fontSize: '3rem',
-      margin: theme.spacing(1)
+      margin: theme.spacing(1),
+      [theme.breakpoints.down('sm')]: {
+        margin: theme.spacing(0)
+      }
     })
   })
 )
