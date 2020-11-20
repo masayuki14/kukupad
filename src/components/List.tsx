@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Formula from './Formula'
 import { MaskType, convertType } from './../enum'
-import RubyTexts from '../ruby_texts'
+import { RubyTexts } from '../constants'
 
 type PropTypes = {
   steps: number[]

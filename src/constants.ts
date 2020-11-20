@@ -1,4 +1,4 @@
-const RubyTexts = [
+export const RubyTexts = [
   [],
   [
     [],
@@ -109,4 +109,5 @@ const RubyTexts = [
     ['く', 'く', '', 'はちじゅういち']
   ]
 ]
-export default RubyTexts
+
+export const RANDOM_AXIS = 99
