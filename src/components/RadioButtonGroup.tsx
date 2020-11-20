@@ -1,5 +1,7 @@
 import React from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { ButtonGroup, Button } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -7,8 +9,8 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       margin: theme.spacing(1)
     },
-    button: (props: { width: number }) => ({
-      width: props.width
+    button: (props: { buttonWith: number }) => ({
+      width: props.buttonWith
     })
   })
 )
@@ -20,17 +22,20 @@ type Item<T> = {
 type PropTypes<T> = {
   items: Item<T>[]
   initial?: T
-  width?: number
-  onChange?: (v: T) => void
+  buttonWith?: number
+  width: Breakpoint
+  onChange?: (v: any) => void
 }
 
-function RadioButtonGroup<T>({
-  items,
-  initial = undefined,
-  width = 104,
-  onChange = () => {}
-}: PropTypes<T>) {
-  const classes = useStyles({ width })
+function RadioButtonGroup<T>(props: PropTypes<T>) {
+  const {
+    items,
+    initial = undefined,
+    buttonWith = 104,
+    width,
+    onChange = () => {}
+  } = props
+  const classes = useStyles({ buttonWith })
   const [selectedValue, setSelectedValue] = React.useState(initial)
 
   const handleChange = (value: T) => {
@@ -40,26 +45,43 @@ function RadioButtonGroup<T>({
     }
   }
 
+  const buttons = items.map((item, i) => (
+    <Button
+      key={i}
+      className={classes.button}
+      variant={selectedValue === item.value ? 'contained' : 'outlined'}
+      onClick={handleChange(item.value)}
+    >
+      {item.label}
+    </Button>
+  ))
+
+  if (isWidthDown('xs', width) && buttons.length > 3) {
+    const groups: JSX.Element[] = []
+    for (let i = 0; i <= buttons.length / 3; i++) {
+      groups.push(
+        <ButtonGroup
+          variant="outlined"
+          color="primary"
+          aria-label="contained primary button group"
+        >
+          {buttons.slice(i * 3, i * 3 + 3)}
+        </ButtonGroup>
+      )
+    }
+
+    return <React.Fragment>{groups}</React.Fragment>
+  }
+
   return (
     <ButtonGroup
       variant="outlined"
       color="primary"
       aria-label="contained primary button group"
     >
-      {items.map((item, i) => {
-        return (
-          <Button
-            key={i}
-            className={classes.button}
-            variant={selectedValue === item.value ? 'contained' : 'outlined'}
-            onClick={handleChange(item.value)}
-          >
-            {item.label}
-          </Button>
-        )
-      })}
+      {buttons}
     </ButtonGroup>
   )
 }
 
-export default RadioButtonGroup
+export default withWidth()(RadioButtonGroup)
