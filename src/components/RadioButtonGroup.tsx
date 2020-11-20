@@ -42,7 +42,7 @@ function RadioButtonGroup<T>({
 
   return (
     <ButtonGroup
-      variant="contained"
+      variant="outlined"
       color="primary"
       aria-label="contained primary button group"
     >
