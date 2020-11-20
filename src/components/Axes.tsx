@@ -9,6 +9,8 @@ import Select from '@material-ui/core/Select'
 import IconButton from '@material-ui/core/IconButton'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
+import { FormControlLabel, Switch } from '@material-ui/core'
+import { RANDOM_AXIS } from '../constants'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +39,7 @@ const axisNumbers = (max: number) =>
 function Axes({ axis = 1, max = 20, onChange = () => {} }: PropTypes) {
   const classes = useStyles()
   const [selectedValue, setSelectedValue] = React.useState(axis)
+  const [checked, toggleChecked] = React.useState(false)
   const values = axisNumbers(max)
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -44,14 +47,24 @@ function Axes({ axis = 1, max = 20, onChange = () => {} }: PropTypes) {
     onChange(Number(event.target.value))
   }
   const handlePlus = () => {
+    toggleChecked(false)
     if (selectedValue === values[values.length - 1]) return
     setSelectedValue(selectedValue + 1)
     onChange(selectedValue + 1)
   }
   const handleMinus = () => {
+    toggleChecked(false)
     if (selectedValue === values[0]) return
     setSelectedValue(selectedValue - 1)
     onChange(selectedValue - 1)
+  }
+  const handleToggle = () => {
+    toggleChecked(!checked)
+    if (!checked) {
+      onChange(RANDOM_AXIS)
+    } else {
+      onChange(selectedValue)
+    }
   }
 
   const items = values.map((v, i) => {
@@ -80,7 +93,12 @@ function Axes({ axis = 1, max = 20, onChange = () => {} }: PropTypes) {
           <FormLabel>かけるかず</FormLabel>
         </Grid>
         <Grid item xs={12} sm={8}>
-          <IconButton color="primary" component="span" onClick={handleMinus}>
+          <IconButton
+            color="primary"
+            component="span"
+            onClick={handleMinus}
+            disabled={checked}
+          >
             <RemoveCircleIcon fontSize="large" />
           </IconButton>
           <FormControl className={classes.formControl}>
@@ -89,13 +107,29 @@ function Axes({ axis = 1, max = 20, onChange = () => {} }: PropTypes) {
               id="demo-simple-select"
               value={selectedValue}
               onChange={handleChange}
+              disabled={checked}
             >
               {items}
             </Select>
           </FormControl>
-          <IconButton color="primary" component="span" onClick={handlePlus}>
+          <IconButton
+            color="primary"
+            component="span"
+            onClick={handlePlus}
+            disabled={checked}
+          >
             <AddCircleIcon fontSize="large" />
           </IconButton>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={checked}
+                onChange={handleToggle}
+                color="primary"
+              />
+            }
+            label="ばらばらにする"
+          />
         </Grid>
       </Grid>
     </React.Fragment>
